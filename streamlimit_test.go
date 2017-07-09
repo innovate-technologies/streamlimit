@@ -37,5 +37,12 @@ func TestStreamLimitWithHalfData(t *testing.T) {
 	count, _ = limiter.Read(firstRead)
 	assert.Equal(t, 8, count)
 	assert.Equal(t, []byte("TESTTEST"), firstRead[:count])
+}
 
+func TestTimeRemaining(t *testing.T) {
+	limiter := New(1, 1)
+
+	limiter.Write([]byte("TESTTEST"))
+
+	assert.Equal(t, 8, limiter.RemainingTime())
 }

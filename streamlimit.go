@@ -59,6 +59,11 @@ func (s *Streamlimiter) Start() {
 	go s.releaseLoop()
 }
 
+// RemainingTime tells how many seconds it will take for the pool to be empty
+func (s *Streamlimiter) RemainingTime() int {
+	return len(s.pool) / s.byterate
+}
+
 func (s *Streamlimiter) releaseLoop() {
 	for {
 		if len(s.pool) > s.bytelimit {

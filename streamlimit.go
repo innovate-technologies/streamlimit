@@ -31,7 +31,7 @@ func New(byterate, timerate int) Streamlimiter {
 
 func (s *Streamlimiter) Read(p []byte) (n int, err error) {
 	for len(s.released) == 0 {
-		time.Sleep(time.Millisecond)
+		time.Sleep(200*time.Millisecond)
 	}
 
 	for n < len(p) {
